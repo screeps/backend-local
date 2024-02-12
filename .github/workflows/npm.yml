@@ -13,17 +13,23 @@ jobs:
     steps:
       - name: ⤵️ Checkout
         uses: actions/checkout@v3
-      # Setup .npmrc file to publish to GitHub Packages
-      - name: 👷 Install
-        run: npm ci
       - name: 🔨 Setup node
         uses: actions/setup-node@v3
         with:
           node-version: '10.x'
+      - name: 👷 Install
+        run: npm ci
       - name: 📦️ Publish package (npmjs)
+        if: github.ref_name == 'master'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_TOKEN }}
+      - name: 📦️ Publish tagged package (npmjs)
+        if: github.ref_name != 'master'
+        run: npm publish --tag ${{ github.ref_name }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_TOKEN }}
+      # Setup .npmrc file to publish to GitHub Packages
       - name: 🔨 Setup node (github registry)
         uses: actions/setup-node@v3
         with:
