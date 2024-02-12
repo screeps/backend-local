@@ -1,6 +1,6 @@
 {
   "name": "@screeps/backend",
-  "version": "3.2.6-rc1",
+  "version": "3.2.6-rc2",
   "description": "",
   "main": "lib/index.js",
   "bin": {
