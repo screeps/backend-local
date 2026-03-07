@@ -27,5 +27,8 @@
     "q-json-response": "^0.1.3",
     "sockjs": "0.3.24",
     "steam-webapi": "^0.6.5"
+  },
+  "publishConfig": {
+    "tag": "beta"
   }
 }
